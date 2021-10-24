@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+    
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        width: 180px;
+        color: black;
+        margin: 1% auto;
+        border-radius: 4px;
+        background: whitesmoke;
+        zoom: 1.9;
+      }
+      .cal {
+        display: grid;
+        grid-template-columns: repeat(4, 25px);
+        grid-template-rows: repeat(5, 25px);
+        background-color: teal;
+        grid-gap: 12px;
+        /* margin: 20px 0; */
+        margin-bottom: 0;
+        border-radius: 0px 0px 5px 5px;
+        padding: 20px;
+      }
+      .cal div {
+        border: 2px solid white;
+        text-align: center;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30%;
+        outline: none;
+        color: whitesmoke;
+        cursor: pointer;
+      }
+      .cal div:hover {
+        color: rgb(0, 0, 0);
+        background-color: rgb(255, 255, 255);
+      }
+      .total {
+        grid-column: span 1;
+      }
+      div:nth-of-type(1),
+      div:nth-of-type(2),
+      div:nth-of-type(3) {
+        font-size: 10px;
+      }
+      body {
+        background-color: #e0e0e0;
+      }
+      input[type="text"] {
+        font-size: 20px;
+        text-align: right;
+        font-family: "Times New Roman", Times, serif;
+        background-color:  teal;
+
+        color: whitesmoke;
+        padding-right: 5px;
+        outline: none;
+        border: none;
+      
+        width: 180px;
+        font-size: 20px;
+        height: 30px;
+        border-radius: 5px 5px 0px 0px;
+      }
+
+      #input:focus {
+        border: 2px solid rgb(255, 255, 255);
+        
+        transition: .2s ease-in-out;
+      }
+      .design {
+        line-height: 0px;
+        padding-top: 12px;
+        padding-left: 10px;
+        font-size: 12px;
+        font-weight: 100;
+       margin-bottom: 10px;
+      }
+      i {
+        font-size: 10px;
+      }
+      h1{
+        text-align: center;
+        font-style: italic;
+       margin-top: 12px;
+       
+      }
+      .fas{
+        font-size: 14px;
+      }
+    
+    </style>
+  </head>
+  <body>
+    <h1>Calculator</h1>
+    <div class="container">
+     
+      
+      <input type="text" name="" id="input" autocomplete="off"/>
+
+      <h5 id="answer"></h5>
+
+      <div class="cal">
+        <div class="clear" onclick="return cl()" value="cl">CE</div>
+        <div class="Delete"  value="cl">C</div>
+        <div class="Del" onclick="return del()" value="del">
+          <i class="fas fa-backspace"></i>
+        </div>
+        <div class="percentage" onclick="return number('%')" value="%">%</div>
+        <div class="one" id="numbers" onclick="return number(1)" value="1">
+          1
+        </div>
+        <div class="two" id="numbers" onclick="return number(2)" value="2">
+          2
+        </div>
+        <div class="three" id="numbers" onclick="return number(3)" value="3">
+          3
+        </div>
+        <div class="divide" onclick="return number('/')" value="/">/</div>
+        <div class="four" id="numbers" onclick="return number(4)" value="4">
+          4
+        </div>
+        <div class="five" onclick="return number(5)" value="5">5</div>
+        <div class="six" onclick="return number(6)" value="6">6</div>
+        <div class="multiply" onclick="return number('*')" value="*">*</div>
+        <div class="seven" onclick="return number(7)" value="7">7</div>
+        <div class="eight" onclick="return number(8)" value="8">8</div>
+        <div class="ninee" onclick="return number(9)" value="9">9</div>
+        <div class="sub" onclick="return number('-')" value="-">-</div>
+        <div class="dot" onclick="return number('.')" value=".">.</div>
+        <div class="zero" onclick="return number(0)" value="0">0</div>
+
+        <div class="add" onclick="return number('+')" value="+">+</div>
+        <div class="total" onclick="return total()" value="=">=</div>
+      </div>
+    </div>
+  </body>
+
+
+
+                                          <!-- Javascript -->
+
+  <script>
+    
+      let userInputValue = document.getElementById("input");
+      let totalValue = document.getElementById("answer");
+
+      function number(num) {
+        userInputValue.value += num;
+        // userInputValue.style.transition=" 1s ease-in-out";
+        userInputValue.style.borderBottom="2px solid white";
+      }
+      function total() {
+        // console.log(userInputValue.value)
+        totalValue.innerHTML = "<i>Answer:</i>"+" "+ parseInt(eval(userInputValue.value));
+       
+        totalValue.setAttribute("class", "design");
+      }
+      let value = -1;
+      function del() {
+        let delValue = userInputValue.value;
+        console.log("val before", value);
+        let final = delValue.slice(-100000000, value);
+
+        console.log(final);
+        console.log("val after", value);
+        userInputValue.value = final;
+      }
+
+      function cl() {
+        userInputValue.value = "";
+        totalValue.innerHTML = "";
+      }
+  </script>
+</html>
